@@ -1,0 +1,93 @@
+* {
+  /* border: 0.15rem solid red; */
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  font-size: 1rem;
+  background-color: black;
+  color: white;
+}
+
+nav {
+  padding: 3rem 2rem;
+  border-right: 0.15rem solid rgb(56, 56, 56);
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+  width: 100%;
+  padding-top: 4rem;
+}
+
+.categories {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.categories button {
+  cursor: pointer;
+  background-color: black;
+  color: white;
+}
+
+.cards {
+  display: grid;
+  grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+  gap: 2rem 1rem;
+}
+
+.cards div {
+  border: 0.15rem solid rgb(84, 84, 84);
+  width: 10rem;
+  height: 12rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.25s ease-in-out;
+}
+
+.cards div:hover {
+  transform: scale(1.05);
+}
+
+.cards div::after {
+  position: absolute;
+  color: white;
+  background-color: black;
+  padding: 0.1rem 0.5rem;
+  border-radius: 1rem;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  font-size: 1.1rem;
+}
+
+.cards div:first-child::after {
+  content: "Fruits";
+}
+
+.cards div:nth-child(2)::after {
+  content: "Vegetables";
+}
+
+.cards div:nth-child(3)::after {
+  content: "Dairy";
+}
+
+.cards div:last-child::after {
+  content: "Meat & Poultry";
+}
+
+.cards img {
+  width: 100%;
+  height: 100%;
+}
