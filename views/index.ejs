@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Homepage</title>
+  </head>
+  <body>
+    <nav>
+      <section>
+        <h2><a href="/">Categories</a></h2>
+        <section class="categories">
+          <button><a href="/fruits">Fruits</a></button>
+          <button><a href="/vegetables">Vegetables</a></button>
+          <button><a href="/dairy">Dairy</a></button>
+          <button><a href="/meatandpoultry">Meat & Poultry</a></button>
+        </section>
+      </section>
+    </nav>
+    <main>
+      <h1>Grocery Inventory</h1>
+      <% if (!categories) { %>
+      <a href="<%= type + '/' +'addItem' %>">
+        <button class="add">Add an Item</button>
+      </a>
+      <% } %>
+      <section class="cards">
+        <% items.forEach((item) => { %>
+        <div>
+          <a href="/<%= categories? item.path : type + '/' + item.path %>">
+            <img src="<%= item.url %>" alt="<%= item.name %>" />
+          </a>
+          <span class="float"><%= item.name %></span>
+        </div>
+        <% }); %>
+      </section>
+    </main>
+  </body>
+</html>
