@@ -6,6 +6,8 @@ const {
   getCategories,
   getAddItem,
   postItem,
+  updateItem,
+  getUpdateItem,
 } = require("./controllers/control");
 const dairyRouter = require("./routes/dairyRouter");
 const fruitsRouter = require("./routes/fruitsRouter");
@@ -20,6 +22,8 @@ app.set("view engine", "ejs");
 app.get("/", getCategories);
 app.get("/:category/addItem", getAddItem);
 app.post("/:category/addItem", postItem);
+app.get("/:category/:item/updateItem", getUpdateItem);
+app.post("/:category/:item/updateItem", updateItem);
 
 app.use("/fruits", fruitsRouter);
 app.use("/vegetables", vegetablesRouter);
