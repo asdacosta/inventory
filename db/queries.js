@@ -50,9 +50,22 @@ async function selectItems(category) {
   return rows;
 }
 
+async function updateItem(category, name, url, price, quantity) {
+  await pool.query(`UPDATE ${category} SET url = $1 WHERE name = $2`, [
+    url,
+    name,
+  ]);
+
+  await pool.query(
+    "UPDATE details SET price = $1, quantity = $2 WHERE id = (SELECT id FROM items WHERE name = $3)",
+    [price, quantity, name]
+  );
+}
+
 module.exports = {
   selectData,
   insertItem,
   selectDetails,
   selectItems,
+  updateItem,
 };
