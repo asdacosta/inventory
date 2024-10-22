@@ -85,6 +85,16 @@ a {
 
 .detailsBody {
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.updateItem {
+  font-size: 1.1rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
 }
 
 .itemDetails {
