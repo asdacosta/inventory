@@ -29,8 +29,7 @@ async function getDetails(req, res) {
   let item = req.params.item;
   item = item.charAt(0).toUpperCase() + item.slice(1);
   const items = await db.selectDetails(item);
-  console.log("These item: ", item);
-  res.render("item", { items: items });
+  res.render("item", { items: items, category: item });
 }
 
 async function getAddItem(req, res) {
@@ -49,7 +48,21 @@ async function postItem(req, res) {
       return res.render("addItem", { category: category });
     }
   }
-  const items = await db.insertItem(category, formatName, url, price, quantity);
+  await db.insertItem(category, formatName, url, price, quantity);
+  res.redirect(`/${category}`);
+}
+
+async function getUpdateItem(req, res) {
+  const category = req.params.category;
+  const urlParts = req.originalUrl.split("/");
+  const itemName = urlParts[2];
+  res.render("updateItem", { category: category, itemName: itemName });
+}
+
+async function updateItem(req, res) {
+  const { itemName, url, quantity, price } = req.body;
+  const category = req.params.category;
+  await db.updateItem(category, itemName, url, price, quantity);
   res.redirect(`/${category}`);
 }
 
@@ -62,4 +75,6 @@ module.exports = {
   getDetails,
   getAddItem,
   postItem,
+  getUpdateItem,
+  updateItem,
 };
