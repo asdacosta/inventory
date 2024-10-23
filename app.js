@@ -8,6 +8,7 @@ const {
   postItem,
   updateItem,
   getUpdateItem,
+  deleteItem,
 } = require("./controllers/control");
 const dairyRouter = require("./routes/dairyRouter");
 const fruitsRouter = require("./routes/fruitsRouter");
@@ -24,6 +25,7 @@ app.get("/:category/addItem", getAddItem);
 app.post("/:category/addItem", postItem);
 app.get("/:category/:item/updateItem", getUpdateItem);
 app.post("/:category/:item/updateItem", updateItem);
+app.post("/:category/:item/deleteItem", deleteItem);
 
 app.use("/fruits", fruitsRouter);
 app.use("/vegetables", vegetablesRouter);
