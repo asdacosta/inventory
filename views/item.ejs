@@ -27,8 +27,13 @@
       </div>
       <% }); %>
     </section>
-    <a href="<%= category %>/updateItem"
-      ><button class="updateItem">Update</button></a
-    >
+    <section style="display: flex; gap: 0.5rem">
+      <a href="<%= item %>/updateItem">
+        <button class="updateItem">Update</button>
+      </a>
+      <form action="/<%= category %>/<%= item %>/deleteItem" method="POST">
+        <button class="updateItem" type="submit">Delete</button>
+      </form>
+    </section>
   </body>
 </html>
