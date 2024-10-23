@@ -62,10 +62,23 @@ async function updateItem(category, name, url, price, quantity) {
   );
 }
 
+async function deleteItem(category, name) {
+  await pool.query(`DELETE FROM ${category} WHERE name = $1`, [name]);
+  await pool.query(
+    `DELETE FROM details WHERE id = (SELECT id FROM ${category} WHERE name = $1)`,
+    [name]
+  );
+  await pool.query(
+    `DELETE FROM items WHERE id = (SELECT id FROM ${category} WHERE name = $1)`,
+    [name]
+  );
+}
+
 module.exports = {
   selectData,
   insertItem,
   selectDetails,
   selectItems,
   updateItem,
+  deleteItem,
 };
