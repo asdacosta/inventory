@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/styles.css" />
+    <title>Update Item</title>
+  </head>
+  <body class="addItemBody">
+    <h2>Update Item</h2>
+    <form action="/<%= category %>/<%= itemName %>/updateItem" method="POST">
+      <div style="display: none">
+        <label for="itemName">Name</label>
+        <input
+          type="text"
+          name="itemName"
+          id="itemName"
+          value="<%= itemName %>"
+        />
+      </div>
+      <div>
+        <label for="quantity">Quantity</label>
+        <input type="number" name="quantity" id="quantity" max="100" required />
+      </div>
+      <div>
+        <label for="price">Price</label>
+        <input type="number" name="price" id="price" max="300" required />
+      </div>
+      <div>
+        <label for="url">Image url</label>
+        <input type="url" name="url" id="url" required />
+      </div>
+      <button>Update</button>
+    </form>
+  </body>
+</html>
