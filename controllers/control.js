@@ -26,10 +26,12 @@ async function getMeat(req, res) {
 }
 
 async function getDetails(req, res) {
+  const urlParts = req.originalUrl.split("/");
+  const category = urlParts[1];
   let item = req.params.item;
   item = item.charAt(0).toUpperCase() + item.slice(1);
   const items = await db.selectDetails(item);
-  res.render("item", { items: items, category: item });
+  res.render("item", { items: items, item: item, category: category });
 }
 
 async function getAddItem(req, res) {
@@ -66,6 +68,14 @@ async function updateItem(req, res) {
   res.redirect(`/${category}`);
 }
 
+async function deleteItem(req, res) {
+  const category = req.params.category;
+  const urlParts = req.originalUrl.split("/");
+  const itemName = urlParts[2];
+  await db.deleteItem(category, itemName);
+  res.redirect(`/${category}`);
+}
+
 module.exports = {
   getCategories,
   getFruits,
@@ -77,4 +87,5 @@ module.exports = {
   postItem,
   getUpdateItem,
   updateItem,
+  deleteItem,
 };
