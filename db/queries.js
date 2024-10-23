@@ -28,6 +28,7 @@ async function insertItem(category, name, url, price, quantity) {
   } else if (category === "Meat & Poultry") {
     category_id = 4;
   }
+  const amount = price * quantity;
 
   await pool.query(
     `INSERT INTO ${category} (name, url, path) VALUES ($1, $2, $3)`,
@@ -39,10 +40,10 @@ async function insertItem(category, name, url, price, quantity) {
     category_id,
   ]);
 
-  await pool.query("INSERT INTO details (price, quantity) VALUES ($1, $2)", [
-    price,
-    quantity,
-  ]);
+  await pool.query(
+    "INSERT INTO details (price, quantity, amount) VALUES ($1, $2, $3)",
+    [price, quantity, amount]
+  );
 }
 
 async function selectItems(category) {
@@ -51,14 +52,16 @@ async function selectItems(category) {
 }
 
 async function updateItem(category, name, url, price, quantity) {
+  const amount = price * quantity;
+
   await pool.query(`UPDATE ${category} SET url = $1 WHERE name = $2`, [
     url,
     name,
   ]);
 
   await pool.query(
-    "UPDATE details SET price = $1, quantity = $2 WHERE id = (SELECT id FROM items WHERE name = $3)",
-    [price, quantity, name]
+    "UPDATE details SET price = $1, quantity = $2, amount = $3 WHERE id = (SELECT id FROM items WHERE name = $4)",
+    [price, quantity, amount, name]
   );
 }
 
